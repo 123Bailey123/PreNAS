@@ -594,6 +594,7 @@ class Searcher(object):
                     cand_list.append(info)
                 if len(cand_list) > 0:
                     json_dict[str(interval[1])] = cand_list
+            print("Number of candidates: ", len(cand_list))
             print("selected candidates:")
             print(json_dict)
             with open(out_file_name, "w") as fp:
