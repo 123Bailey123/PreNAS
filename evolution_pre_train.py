@@ -443,6 +443,7 @@ class Searcher(object):
     def search(self, out_file_name=None):
 
         print('searching...')
+        print("Search mode: ", self.args.search_mode)
         if not self.args.block_score_method_for_mlp == 'deeper_is_better' or not self.args.block_score_method_for_head == 'deeper_is_better':
             self.head_mlp_scores = self.score_maker.get_block_scores(self.model, self.args, self.choices)
 
@@ -594,7 +595,7 @@ class Searcher(object):
                     cand_list.append(info)
                 if len(cand_list) > 0:
                     json_dict[str(interval[1])] = cand_list
-            print("Number of candidates: ", len(cand_list))
+
             print("selected candidates:")
             print(json_dict)
             with open(out_file_name, "w") as fp:
