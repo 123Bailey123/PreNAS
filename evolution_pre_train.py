@@ -574,6 +574,8 @@ class Searcher(object):
                 k = self.index_to_param_interval(index)
                 self.interval_cands[k] = [item['cand'] for item in self.all_cands[index]]
 
+            print("Number candidates: ", len(self.interval_cands))
+
         if out_file_name is None:
             out_file_name = f'out/interval_cands_{self.args.super_model_size}_{self.args.score_method}_{self.args.block_score_method_for_mlp}_for_mlp_{self.args.block_score_method_for_head}_for_head'
             out_file_name += f'_i{self.args.param_interval}_top_{self.args.cand_per_interval}.pt'
