@@ -516,6 +516,10 @@ class Searcher(object):
         else:
             max_dim = max(self.choices['embed_dim'])
             iter_cnt = 0
+            print(self.choices['embed_dim'])
+            print(self.choices['depth'])
+
+            ss = 0
             for embed_dim in self.choices['embed_dim']:
                 for depth in self.choices['depth']:
                     depth_ids = list(range(depth+1))
@@ -547,6 +551,7 @@ class Searcher(object):
                     for mlp_conf in mlp_confs:
                         iter_cnt += 1
                         for head_conf in head_confs:
+                            ss += 1
                             cand = tuple([depth] + mlp_conf + head_conf + [embed_dim])
                             depth, mlp_ratio, num_heads, embed_dim = decode_cand_tuple(cand)
                             sampled_config = {}
@@ -567,6 +572,7 @@ class Searcher(object):
                             self.vis_dict[cand] = info
                             if index in self.all_cands.keys():
                                 self.all_cands[index].append(info)
+            print("Search space: ", ss)
 
             self.select_cands(key=lambda x: x['score'])
 
@@ -586,6 +592,7 @@ class Searcher(object):
                 cand_list = []
                 for cand in self.interval_cands[interval]:
                     depth, mlp_ratio, num_heads, embed_dim = decode_cand_tuple(cand)
+                    print(float(self.vis_dict[cand]['params']))
                     info = {
                         'layer_num': depth,
                         'mlp_ratio': mlp_ratio,
