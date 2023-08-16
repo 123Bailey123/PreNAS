@@ -1,6 +1,6 @@
 ### for tiny search space
-python -m torch.distributed.launch \
---nproc_per_node=8 \
+python3 -m torch.distributed.launch \
+--nproc_per_node=1 \
 --use_env \
 two_step_search.py \
 --gp \
@@ -16,11 +16,12 @@ two_step_search.py \
 --param-interval 1.0 \
 --min_param_limits 5 \
 --param_limits 12 \
+--data-set CIFAR10 \
 --data-path ../datas/imagenet \
 --cfg ./experiments/supernet/supernet-T.yaml \
 --interval-cands-output ./interval_cands/tiny.json
 
-python candidates_to_choices.py ./interval_cands/tiny.json ./experiments/supernet/tiny.yaml
+python3 candidates_to_choices.py ./interval_cands/tiny.json ./experiments/supernet/tiny.yaml
 
 ### for small search space
 #python -m torch.distributed.launch \

@@ -1,6 +1,6 @@
 ### train PreNAS_tiny
-python -m torch.distributed.launch \
---nproc_per_node=8 \
+python3 -m torch.distributed.launch \
+--nproc_per_node=1 \
 --use_env \
 supernet_train.py \
 --gp \
@@ -17,6 +17,7 @@ supernet_train.py \
 --mixup-mode elem \
 --aa rand-n3-m10-mstd0.5-inc1 \
 --recount 2 \
+--data-set CIFAR10 \
 --data-path ../datas/imagenet \
 --cfg ./experiments/supernet/base.yaml \
 --candfile ./interval_cands/base.json \
